@@ -1,6 +1,7 @@
 # Laboration 1
 # DD1310
 # Taras Pustovit CENMI1
+# 2025-10-28 16:26
 # Detta är en program som frågar användare om dens namn och ålder, efter att ha fått ålder i form av antalet år omvanldar den antalet år till antalet dagar, timmar, minuter. 
 
 print("Hej! Vad heter du?")
