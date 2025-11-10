@@ -19,7 +19,6 @@ while val != 5:
             print(grupp, "har medlemmarna:", end=" ")
             for medlem in grupper[grupp]:
                 print(medlem, end=" ")
-            print()
     elif val == 2:
         grupp = input("Vad heter gruppen du ska lägga till en medlem till? ")
         if grupp in grupper:
