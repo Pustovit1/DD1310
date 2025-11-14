@@ -1,3 +1,9 @@
+#Taras Pustovit
+#Labbortaion 3
+#Skapar 3 grupper och håller koll på medlemar i gruppen. Man kan lägga till/ta bort medlemmar, 
+#skriva ut alla grupper och deras medlemmar och bestämma ordförände beroende på vem som har längst namn i gruppen
+#2025-11-04
+
 print("Välkommen till programmet som håller koll på dina grupper!")
 ANTAL_GRUPPER = 3
 grupper = {}
