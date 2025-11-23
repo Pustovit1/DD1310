@@ -58,11 +58,11 @@ def kontrollera_diagonaler(spelplan):
   Inparameter: spelplan (matris)
   Returvärde: True om det finns vinnare annars False (booleskt värde)
   """
-  if ' ' not in [spelplan[2][0], spelplan[1][1], spelplan[0][2]]:
-    if spelplan[2][0] == spelplan[1][1] == spelplan[0][2]:
+  if ' ' not in [spelplan[0][0], spelplan[1][1], spelplan[2][2]]:
+    if spelplan[0][0] == spelplan[1][1] == spelplan[2][2]:
       return True
-  elif ' ' not in [spelplan[0][0],spelplan[1][1], spelplan[2][0]]:
-    if spelplan[0][0] == spelplan[1][1] == spelplan[2][0]:
+  elif ' ' not in [spelplan[0][2],spelplan[1][1], spelplan[2][0]]:
+    if spelplan[0][2] == spelplan[1][1] == spelplan[2][0]:
       return True
   else:
     return False
