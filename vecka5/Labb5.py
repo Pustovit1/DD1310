@@ -21,11 +21,14 @@ def hantera_rad(rad_sträng):
         elif len(uppdelad_rad) != 2:
             print("Rad ignorerad pga: Fel antal delar")
             raise IndexError 
-        elif int(uppdelad_rad[1]) > 50:
+        elif int(uppdelad_rad[1]) > 50 or int(uppdelad_rad[1]<0):
             raise ValueError
         elif uppdelad_rad[0] == "":
             print("Rad ignorerad pga: Namn saknas")
-            raise IndexError
+            return None
+        elif uppdelad_rad[1] == "":
+            print("Rad ignorerad pga: Poäng saknas")
+            return None
         else:
             namn = uppdelad_rad[0].strip()
             poäng_sträng = uppdelad_rad[1].strip()
@@ -47,9 +50,9 @@ def läs_resultat_från_fil(filnamn):
     with open(f"{filnamn}", "r") as infil:
         all_text = infil.readlines()
         for rad in all_text:
-            text = hantera_rad(rad)
-            if text != None:
-                resultat.append(text)
+            hanterad_rad = hantera_rad(rad)
+            if hanterad_rad != None:
+                resultat.append(hanterad_rad)
     return resultat
     
     
