@@ -1,4 +1,4 @@
-from Vara import *
+from vecka7.Vara import *
 class Recept():
   """En klass som beskriver ett recept"""
   def __init__(self, maträtt, ingredienser):

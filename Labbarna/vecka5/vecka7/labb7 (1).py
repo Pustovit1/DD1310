@@ -1,9 +1,9 @@
 #Taras Pustovit, Lukas Liljestad
 #Programmen skapar en inköpslista utifrån vilka recept användaren väljer.
 #09/12/2025
-from Recept import *
-from Vara import *
-from Inkopslista import *
+from vecka7.Recept import *
+from vecka7.Vara import *
+from vecka7.Inkopslista import *
 
 def skapa_vara(text):
   """Delar upp en strängen på formatet namn; mängd enhet och skapar ett Vara-objekt:
