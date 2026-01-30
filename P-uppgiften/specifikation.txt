@@ -1,0 +1,39 @@
+Beskrivning av vad programmet ska göra (algoritm)
+Beskrivning av datastrukturen, med bild
+Beskrivning av minst en klass, med attribut och metoder
+Förslag på funktioner med indata och utdata
+Tidsplan
+
+Titel: Periodiska systemet
+Uppgifts nr. 178
+Författare: Taras Pustovit
+Datum: 2026-01-27
+
+Detta program ska hjälpa en person att testa sina kunskaper inom periodiska systemet. 
+Användaren väljer vilket område hen vill träna på (atombeteckning, atomnamn, atomvikt eller atomnummer).
+
+Atom-objekten sparas i en lista atom_lista, som är ett atribut i klassen Periodiska_systemet.
+
+En kLass som beskriver en Atom:
+    beteckning - beteckningen på atomen
+    namn - namnet på atomen
+    nummer - nummer på atomen
+    vikt - vikten på atomen
+
+Class Atom():
+
+    def __init__(self, beteckning, namn, nummer, vikt):
+    """Skapar en ny atom.
+    Inparameter: self, beteckning(str), namn(str), nummer(int), vikt(float)
+    Returnväde: ingen"""
+    self.beteckning = beteckning
+    self.namn = namn
+    self.nummer = nummer
+    self.vikt = vikt
+
+    def __str__(self):
+    """Returnerar en sträng som beskriver atomen
+    Inparameter: self
+    Returnväde: sträng"""
+    return sträng
+
