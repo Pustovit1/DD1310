@@ -23,17 +23,160 @@ En kLass som beskriver en Atom:
 Class Atom():
 
     def __init__(self, beteckning, namn, nummer, vikt):
-    """Skapar en ny atom.
+    """
+    Skapar en ny atom.
+    
     Inparameter: self, beteckning(str), namn(str), nummer(int), vikt(float)
-    Returnväde: ingen"""
+    Returnväde: ingen
+    """
     self.beteckning = beteckning
     self.namn = namn
     self.nummer = nummer
     self.vikt = vikt
 
     def __str__(self):
-    """Returnerar en sträng som beskriver atomen
+    """
+    Returnerar en sträng som beskriver atomen
+    
     Inparameter: self
-    Returnväde: sträng"""
+    Returnväde: sträng
+    """
     return sträng
 
+Klass Atomregister():
+
+    def __init__(self):
+    """
+    Skapar en tom datastruktur för atomer
+    
+    Inparameter:ingen
+    Returnväde:ingen
+    """
+    pass
+
+    def __ls__(self, other, kriterie):
+    """
+    Sorterar atomer efter en av kriterierna.
+    
+    Inparameter: self, other, kriterie(str).
+    Returnväde: sorterad_lista
+    """
+    pass
+
+    def läs_in(filnamn):
+    """
+    Funktion som läser in data från en fil.
+    
+    Inparameter: filnamn(str)
+    Returnväde: atom (Atom-objekt)
+    """
+    return atom
+
+    def hamta_slumpad_atom(self):
+        """
+        Returnerar en slumpmässigt vald atom.
+        
+        Inparameter: ingen
+        Returvärde: Atom(objekt)
+        """
+        pass
+
+
+def visa_meny():
+    """
+    Skriver ut programmets huvudmeny och läser in användarens val.
+    
+    Inparameter:ingen
+    Returvärde: val(int)
+    """
+
+    #Något i stylen med:
+    """
+        Menyval:
+        1. Visa lista över alla atomer
+        2. Träna på atomnummer
+        3. Träna på atombeteckningar
+        4. Träna på atomnamn
+        5. Sluta
+    """
+    pass
+    return val
+
+def trana_atomnummer(atomregister):
+    """
+    Träningsläge för atomnummer. 
+    Programmet väljer en slumpmässig atom och frågar användaren vilket atomnummer atomen har. 
+    Användaren har maximalt tre försök. Vid tre felaktiga försök visas rätt svar.
+    
+    Inpaarmeter:atomregister(Atomregister-objekt)
+    Returnväde:Ingen
+    """
+    pass
+
+
+def trana_atombeteckning(atomregister):
+    """
+    Träningsläge för atombeteckningar. 
+    Användaren ska ange korrekt atombeteckning för en slumpad atom. Max tre försök tillåts.
+    
+    Inpaarmeter:atomregister(Atomregister-objekt)
+    Returnväde:Ingen
+    """
+    pass
+
+
+def trana_atomnamn(atomregister):
+    """
+    Träningsläge för atomnamn.
+    Användaren ska ange korrekt atomnamn baserat på atombeteckning eller atomnummer.
+    
+    Inpaarmeter:atomregister(Atomregister-objekt)
+    Returnväde:Ingen
+    """
+    pass
+
+def huvudprogram():
+  """Algoritm:
+    1. Hälsar välkommen
+    2. Läser in filen med alla atomer och skapar atom-objekt.
+    3. Skriver ut huvud meny
+    4. Låter användare göra ett menyval eller att avsluta
+    5. Om användaren inte väljer att avsluta, utför det valda menyvalet
+    6. Upprepar steg 3-5, tills det att användaren väljer att avsluta
+    7. Avslutar programmet
+    """
+    pass
+
+-------------------------
+        TIDSPLAN
+-------------------------
+Vecka 5: Arbeta med specifikation
+Vecka 6: Redovisa specifikation. Påbörja prototyp 1.
+Vecka 7-8: Jobba med prototyp 1. Försöka bli klar med E-nivå krav.
+Vecka 9: Redovisa prototyp 1.
+Vecka 10-11: Tenta P. Vilket innebär plugga inför andra tentor.
+Vecka 12-13: Jobba med prototyp 2. Böjra implementera C-kraven.
+Vecka 14: Redovisa prototyp 2. 
+Vecka 15: Påsklov
+Vecka 16: Implementera B-kraven försöka mig på A-kraven.
+Vecka 17: Granska koden, felsöka allt, boka redovisningstid.
+Vecka 18. Lämna in och Redovisa
+
+-------------------------
+       Datastruktur
+-------------------------
+
++-------------------------------------- Atom -----------------------------------------------+
+|                                                                                           |
+|                                 ---- Atomregister ----                                    |
+|                                 |                      |                                  |
+|        +--------Atom---------+   +--------Atom---------+   +--------Atom---------+        |
+|        |                     |   |                     |   |                     |        |
+|        | Beteckning: "H"     |   | Beteckning: "He"    |   | Beteckning: "Li"    |        |
+|        | Nummer= 1           |   | Nummer= 2           |   | Nummer= 3           |        |
+|        | Namn:"Väte"         |   | Namn:"Helium"       |   | Namn:"Litium"       |        |
+|        | Vikt = 1.008        |   | Vikt = 4.0026       |   | Vikt = 6.94         |        |
+|        |                     |   |                     |   |                     |        |
+|        +---------------------+   +---------------------+   +---------------------+        |
+|                                                                                           |
++-------------------------------------------------------------------------------------------+
