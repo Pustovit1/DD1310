@@ -38,14 +38,27 @@ class Atomregister():
         """ 
         self.atomer = []
     
-    def __ls__(self, other, kriterie):
+    def __lt__(self, other, kriterie):
         """
         Sorterar atomer efter en av kriterierna.
 
         Inparameter: self, other, kriterie(str).
         Returnväde: sorterad_lista
         """
-        pass
+        if kriterie == "nummer":
+            return self.nummer < other.nummer
+        elif kriterie == "beteckning":
+            return self.beteckning < other.beteckning
+        elif kriterie == "namn":
+            return self.namn < other.namn
+        elif kriterie == "vikt":
+            return self.vikt < other.vikt
+        elif kriterie == "kolumn":
+            return self.kolumn < other.kolumn
+        elif kriterie == "rad":
+            return self.rad < other.rad
+        else:
+            raise ValueError("Felaktigt kriterie, försök igen.")
     
     def läs_in(self, filnamn):
         """
@@ -74,7 +87,7 @@ class Atomregister():
         Inparameter: ingen
         Returvärde: Atom(objekt)
         """
-        pass
+         
 
 
 def visa_meny(atomregister):
@@ -110,7 +123,7 @@ def visa_meny(atomregister):
 def visa_alla_atomer(atomregister):
     """
     Skriver ut en lista över alla atomer i atomregistret.
-    
+
     Inparameter: atomregister(Atomregister-objekt)
     Returvärde: ingen
     """
@@ -126,8 +139,7 @@ def trana_atomnummer(atomregister):
     Inpaarmeter:atomregister(Atomregister-objekt)
     Returnväde:Ingen
     """
-    pass
-
+    
 
 def trana_atombeteckning(atomregister):
     """
