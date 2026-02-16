@@ -1,4 +1,4 @@
-from random import *
+import random
 
 class Atom():
     def __init__(self, beteckning, nummer, namn, vikt, kolumn, rad):
@@ -22,43 +22,30 @@ class Atom():
         Returnväde: sträng
         """
         return (
-            "Atomen: " + self.namn
-            + " betecknas som: " + self.beteckning
-            + " har atomnummer: " + str(self.nummer)
-            + " och väger: " + str(self.vikt) + " U"
+            self.namn
+            + " Beteckning: " + self.beteckning
+            + " Atomnummer: " + str(self.nummer)
+            + " Vikt: " + str(self.vikt) + " U"
         )
+    
+    def __lt__(self, other):
+        """
+        Sorterar atomer efter atomnummer.
+
+        Inparameter: self, other
+        Returnväde: sorterad_lista
+        """
+        return self.nummer < other.nummer
 
 class Atomregister():
 
-    def __init__(self):
+    def __init__(self,):
         """
         Skapar en tom datastruktur för atomer
         Inparameter:ingen
         Returnväde:ingen
         """ 
-        self.atomer = []
-    
-    def __lt__(self, other, kriterie):
-        """
-        Sorterar atomer efter en av kriterierna.
-
-        Inparameter: self, other, kriterie(str).
-        Returnväde: sorterad_lista
-        """
-        if kriterie == "nummer":
-            return self.nummer < other.nummer
-        elif kriterie == "beteckning":
-            return self.beteckning < other.beteckning
-        elif kriterie == "namn":
-            return self.namn < other.namn
-        elif kriterie == "vikt":
-            return self.vikt < other.vikt
-        elif kriterie == "kolumn":
-            return self.kolumn < other.kolumn
-        elif kriterie == "rad":
-            return self.rad < other.rad
-        else:
-            raise ValueError("Felaktigt kriterie, försök igen.")
+        self.atomLista = []
     
     def läs_in(self, filnamn):
         """
@@ -77,17 +64,18 @@ class Atomregister():
                 kolumn = int(delar[4])
                 rad = int(delar[5])
                 atom = Atom(beteckning, nummer, namn, vikt, kolumn, rad)
-                self.atomer.append(atom)
-            
-
-    def hamta_slumpad_atom(self):
+                self.atomLista.append(atom)
+                
+    def slumpad_atom(self):
         """
         Returnerar en slumpmässigt vald atom.
         
         Inparameter: ingen
         Returvärde: Atom(objekt)
         """
-         
+        return self.atomLista[random.randrange(0, len(self.atomLista), 1)]
+    
+
 
 
 def visa_meny(atomregister):
@@ -98,14 +86,14 @@ def visa_meny(atomregister):
     Returvärde: val(int)
     """
 
-    """
+    print("""
         Menyval:
         1. Visa lista över alla atomer
         2. Träna på atomnummer
         3. Träna på atombeteckningar
         4. Träna på atomnamn
-        5. Sluta
-    """ 
+        5. Avsluta
+    """)
     val = int(input("Ange ditt val: "))
     while val != 5:
         if val == 1:
@@ -127,8 +115,10 @@ def visa_alla_atomer(atomregister):
     Inparameter: atomregister(Atomregister-objekt)
     Returvärde: ingen
     """
-    for atom in atomregister.atomer:
+    atomregister.atomLista.sort()
+    for atom in atomregister.atomLista:
         print(atom)
+
 
 def trana_atomnummer(atomregister):
     """
@@ -139,6 +129,23 @@ def trana_atomnummer(atomregister):
     Inpaarmeter:atomregister(Atomregister-objekt)
     Returnväde:Ingen
     """
+    atom = atomregister.slumpad_atom()
+    x = 0
+    while(x<3):
+        print(f"Vilken atomnummer har {atom.namn}?")
+        try:
+            svar = int(input(" "))
+        except ValueError:
+            print("Skriv ditt svar med heltal.")
+        if svar == atom.nummer:
+            print("Du har svarat rätt!")
+            break
+        else:
+            print("Du svarade fel")
+            x += 1
+    if x == 3:
+        print(f"{atom.namn} har atomnummer: {atom.nummer}") 
+    
     
 
 def trana_atombeteckning(atomregister):
