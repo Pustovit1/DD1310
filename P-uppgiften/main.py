@@ -1,4 +1,4 @@
-import random
+from random import *
 
 class Atom():
     def __init__(self, beteckning, nummer, namn, vikt, kolumn, rad):
@@ -14,7 +14,6 @@ class Atom():
         self.vikt = vikt
         self.kolumn = kolumn
         self.rad = rad
-        self.atribut = ""
 
     def __str__(self):
         """
@@ -23,30 +22,43 @@ class Atom():
         Returnväde: sträng
         """
         return (
-            self.namn
-            + " Beteckning: " + self.beteckning
-            + " Atomnummer: " + str(self.nummer)
-            + " Vikt: " + str(self.vikt) + " U"
+            "Atomen: " + self.namn
+            + " betecknas som: " + self.beteckning
+            + " har atomnummer: " + str(self.nummer)
+            + " och väger: " + str(self.vikt) + " U"
         )
-    
-    def __lt__(self, other):
-        """
-        Sorterar atomer efter atomnummer.
-
-        Inparameter: self, other
-        Returnväde: sorterad_lista
-        """
-        return self.nummer < other.nummer
 
 class Atomregister():
 
-    def __init__(self,):
+    def __init__(self):
         """
         Skapar en tom datastruktur för atomer
         Inparameter:ingen
         Returnväde:ingen
         """ 
-        self.atomLista = []
+        self.atomer = []
+    
+    def __lt__(self, other, kriterie):
+        """
+        Sorterar atomer efter en av kriterierna.
+
+        Inparameter: self, other, kriterie(str).
+        Returnväde: sorterad_lista
+        """
+        if kriterie == "nummer":
+            return self.nummer < other.nummer
+        elif kriterie == "beteckning":
+            return self.beteckning < other.beteckning
+        elif kriterie == "namn":
+            return self.namn < other.namn
+        elif kriterie == "vikt":
+            return self.vikt < other.vikt
+        elif kriterie == "kolumn":
+            return self.kolumn < other.kolumn
+        elif kriterie == "rad":
+            return self.rad < other.rad
+        else:
+            raise ValueError("Felaktigt kriterie, försök igen.")
     
     def läs_in(self, filnamn):
         """
@@ -65,31 +77,18 @@ class Atomregister():
                 kolumn = int(delar[4])
                 rad = int(delar[5])
                 atom = Atom(beteckning, nummer, namn, vikt, kolumn, rad)
-                self.atomLista.append(atom)
-                
-    def slumpad_atom(self):
+                self.atomer.append(atom)
+            
+
+    def hamta_slumpad_atom(self):
         """
         Returnerar en slumpmässigt vald atom.
         
         Inparameter: ingen
         Returvärde: Atom(objekt)
         """
-        return self.atomLista[random.randrange(0, len(self.atomLista), 1)]
-    
-def valet(atomregister):
-    """
-    Programmet frågar användaren om ett tal och kotrollerar att svaret är angivet som heltal
-    
-    Inparameter: Atomregister(obejkt)
-    Returnvärde: resultat(int)
-    """
-    tal = input(" ")
-    try:
-        resultat = int(tal) 
-        return resultat
-    except ValueError:
-        print("Svara med heltal!")
-        visa_meny(atomregister)
+         
+
 
 def visa_meny(atomregister):
     """
@@ -99,32 +98,27 @@ def visa_meny(atomregister):
     Returvärde: val(int)
     """
 
-    print("""
+    """
         Menyval:
         1. Visa lista över alla atomer
         2. Träna på atomnummer
         3. Träna på atombeteckningar
         4. Träna på atomnamn
-        5. Avsluta
-    """)
-    val = valet(atomregister)
-    match val:
-        case 1:
+        5. Sluta
+    """ 
+    val = int(input("Ange ditt val: "))
+    while val != 5:
+        if val == 1:
             visa_alla_atomer(atomregister)
-            visa_meny(atomregister)
-        case 2:
-            träna(atomregister, 0)
-            visa_meny(atomregister)
-        case 3:
-            träna(atomregister, 1)
-            visa_meny(atomregister)
-        case 4:
-            träna(atomregister, 2)
-            visa_meny(atomregister)
-        case 5:
-            print("Programet avslutas. Forstätt ha en fin dag!")
-        case 6:
-            print("Felaktigt val, försök igen. Välj mellan 1-5")
+        elif val == 2:
+            trana_atomnummer(atomregister)
+        elif val == 3:
+            trana_atombeteckning(atomregister)
+        elif val == 4:
+            trana_atomnamn(atomregister)
+        else:
+            print("Felaktigt val, försök igen.")
+        val = int(input("Ange ditt val: "))
 
 def visa_alla_atomer(atomregister):
     """
@@ -133,55 +127,40 @@ def visa_alla_atomer(atomregister):
     Inparameter: atomregister(Atomregister-objekt)
     Returvärde: ingen
     """
-    atomregister.atomLista.sort()
-    for atom in atomregister.atomLista:
+    for atom in atomregister.atomer:
         print(atom)
 
-def svar_kontroll(atom, läge, atomregister):
-     """
-     Kontrollerar användarens svar och håller räkning på 3 försök
-     
-     Inparameter: Atom(objekt), läge(int), Atomregister(objekt)
-     Returnvärde: Ingen
-     """
-     x = 0
-     while(x<3):
-        if läge == 0:
-            svar = valet(atomregister)
-        else:
-            svar =input(" ")        
-        
-        if svar == atom.atribut:
-            print("Du har svarat rätt!")
-            break
-        else:
-            print("Du svarade fel")
-            x += 1
-            if x == 3:                        
-                print(f"Rätt svar är: {atom.atribut}") 
-
-def träna(atomregister, träningsläge):
-    """ 
-    Programmet väljer en slumpmässig atom och frågar användaren vilket atomnummer/atombeteckning/namn atomen har beroende på vilket läge använderen väljer. 
+def trana_atomnummer(atomregister):
+    """
+    Träningsläge för atomnummer. 
+    Programmet väljer en slumpmässig atom och frågar användaren vilket atomnummer atomen har. 
     Användaren har maximalt tre försök. Vid tre felaktiga försök visas rätt svar.
     
-    Inpaarmeter:atomregister(Atomregister-objekt), träningsläge
+    Inpaarmeter:atomregister(Atomregister-objekt)
     Returnväde:Ingen
     """
-    atom = atomregister.slumpad_atom()
-    match träningsläge:
-        case 0:
-            atom.atribut = atom.nummer
-            print(f"Vilken atomnummer har {atom.namn}?")
-            svar_kontroll(atom,0, atomregister)
-        case 1:
-            atom.atribut = atom.beteckning
-            print(f"Vilken atombeteckning har {atom.namn}?")
-            svar_kontroll(atom, 1, atomregister)
-        case 2:
-            atom.atribut = atom.namn
-            print(f"Vilken namn har {atom.beteckning}?")
-            svar_kontroll(atom, 1, atomregister)
+    
+
+def trana_atombeteckning(atomregister):
+    """
+    Träningsläge för atombeteckningar. 
+    Användaren ska ange korrekt atombeteckning för en slumpad atom. Max tre försök tillåts.
+    
+    Inpaarmeter:atomregister(Atomregister-objekt)
+    Returnväde:Ingen
+    """
+    pass
+
+
+def trana_atomnamn(atomregister):
+    """
+    Träningsläge för atomnamn.
+    Användaren ska ange korrekt atomnamn baserat på atombeteckning eller atomnummer.
+    
+    Inpaarmeter:atomregister(Atomregister-objekt)
+    Returnväde:Ingen
+    """
+    pass
 
 def huvudprogram():
     atomregister = Atomregister()
