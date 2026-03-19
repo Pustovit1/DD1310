@@ -35,7 +35,7 @@ class Atom():
 
 class Atomregister():
 
-    def __init__(self,):
+    def __init__(self):
         """
         Skapar en tom datastruktur för atomer
         Inparameter:ingen
@@ -140,7 +140,7 @@ def visa_alla_atomer(atomregister):
         print(atom)
     print("---------------------------------- ---")
 
-def svar_kontroll(atom, läge):
+def svar_kontroll(atom, läge, alternativ1=0, alernativ2 = 0):
      """
      Kontrollerar användarens svar och håller räkning på 3 försök
      
@@ -152,6 +152,8 @@ def svar_kontroll(atom, läge):
         if läge == 0:
             svar = valet(f"Försök {x + 1}/3 - Ditt svar")
             korrekt = svar == atom.atribut
+        elif läge == 2:
+            svar = input(f"Försök {x + 1}/3 - Ditt svar")
         else:
             svar = input(f"Försök {x + 1}/3 - Ditt svar: ")
             korrekt = svar == str(atom.atribut)
@@ -173,6 +175,7 @@ def träna(atomregister, träningsläge):
     Inpaarmeter:atomregister(Atomregister-objekt), träningsläge
     Returnväde:Ingen
     """
+    
     atom = atomregister.slumpad_atom()
     match träningsläge:
         case 0:
@@ -187,6 +190,10 @@ def träna(atomregister, träningsläge):
             atom.atribut = atom.namn
             print(f"Vilket namn har atomen {atom.beteckning}?")
             svar_kontroll(atom, 1)
+        case 3:
+            atom.atrinut = atom.vikt
+            print(f"Vilken vikt har {atom.namn}?")
+            svar_kontroll(atom, 2)
 
 def huvudprogram():
     atomregister = Atomregister()
