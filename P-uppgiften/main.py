@@ -107,7 +107,7 @@ def visa_meny(atomregister):
         """
     )
     val = valet("Välj ett alternativ (1-6)")
-    match val:
+    match val:                      #Lärde mig på gymnasiet
         case 1:
             visa_alla_atomer(atomregister)
             visa_meny(atomregister)
@@ -148,7 +148,7 @@ def svar_kontroll(atom, läge, alternativ = []):
      """
      Kontrollerar användarens svar och håller räkning på 3 försök
      
-     Inparameter: Atom(objekt), läge(int), Atomregister(objekt)
+     Inparameter: Atom(objekt), läge(int), alternativ(list)
      Returnvärde: Ingen
      """
      x = 0
@@ -199,7 +199,7 @@ def träna(atomregister, träningsläge):
             atom.atribut = atom.vikt
             print(f"Vilken vikt har {atom.namn}?")
             alternativ = [atom.vikt, atomregister.slumpad_atom().vikt, atomregister.slumpad_atom().vikt]
-            random.shuffle(alternativ)
+            random.shuffle(alternativ)              #https://www.w3schools.com/python/ref_random_shuffle.asp
             n = 0
             for svaralternativ in alternativ:
                 n += 1
