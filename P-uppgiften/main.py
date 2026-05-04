@@ -101,11 +101,12 @@ def visa_meny(atomregister):
         2. Träna på atomnummer
         3. Träna på atombeteckningar
         4. Träna på atomnamn
-        5. Avsluta
+        5. Träna på atomvikt
+        6. Avsluta
         ------------------------------
         """
     )
-    val = valet("Välj ett alternativ (1-5)")
+    val = valet("Välj ett alternativ (1-6)")
     match val:
         case 1:
             visa_alla_atomer(atomregister)
@@ -120,9 +121,12 @@ def visa_meny(atomregister):
             träna(atomregister, 2)
             visa_meny(atomregister)
         case 5:
+            träna(atomregister, 3)
+            visa_meny(atomregister)
+        case 6:
             print("Programmet avslutas. Fortsätt ha en fin dag!")
         case _:
-            print("Felaktigt val. Välj ett tal mellan 1 och 5.")
+            print("Felaktigt val. Välj ett tal mellan 1 och 6.")
             visa_meny(atomregister)
 
 def visa_alla_atomer(atomregister):
@@ -140,7 +144,7 @@ def visa_alla_atomer(atomregister):
         print(atom)
     print("---------------------------------- ---")
 
-def svar_kontroll(atom, läge, alternativ1=0, alernativ2 = 0):
+def svar_kontroll(atom, läge, alternativ = []):
      """
      Kontrollerar användarens svar och håller räkning på 3 försök
      
@@ -150,14 +154,15 @@ def svar_kontroll(atom, läge, alternativ1=0, alernativ2 = 0):
      x = 0
      while(x < 3):
         if läge == 0:
-            svar = valet(f"Försök {x + 1}/3 - Ditt svar")
+            svar = valet(f"Försök {x + 1}/3 - Ditt svar: ")
             korrekt = svar == atom.atribut
-        elif läge == 2:
-            svar = input(f"Försök {x + 1}/3 - Ditt svar")
-        else:
+        elif läge == 1:
             svar = input(f"Försök {x + 1}/3 - Ditt svar: ")
             korrekt = svar == str(atom.atribut)
-
+        elif läge == 2:
+            svar = valet(f"Försök {x + 1}/3 - Ditt svar: ")
+            korrekt = alternativ[svar-1] == atom.vikt
+        
         if korrekt:
             print("Rätt svar!")
             break
@@ -191,9 +196,15 @@ def träna(atomregister, träningsläge):
             print(f"Vilket namn har atomen {atom.beteckning}?")
             svar_kontroll(atom, 1)
         case 3:
-            atom.atrinut = atom.vikt
+            atom.atribut = atom.vikt
             print(f"Vilken vikt har {atom.namn}?")
-            svar_kontroll(atom, 2)
+            alternativ = [atom.vikt, atomregister.slumpad_atom().vikt, atomregister.slumpad_atom().vikt]
+            random.shuffle(alternativ)
+            n = 0
+            for svaralternativ in alternativ:
+                n += 1
+                print(str(n) + ". " + str(svaralternativ))
+            svar_kontroll(atom, 2, alternativ)
 
 def huvudprogram():
     atomregister = Atomregister()
